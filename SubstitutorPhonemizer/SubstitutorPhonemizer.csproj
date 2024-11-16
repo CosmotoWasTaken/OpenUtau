@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
+        <TargetFramework>net6.0-windows</TargetFramework>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(OS)' != 'Windows_NT' ">
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenUtau.Core\OpenUtau.Core.csproj" />
+    <ProjectReference Include="..\OpenUtau.Plugin.Builtin\OpenUtau.Plugin.Builtin.csproj" />
+  </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="copy &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(SolutionDir)OpenUtau\bin\Debug\net6.0-windows\Plugins\$(TargetName).dll&quot;" />
+    </Target>
+
+</Project>
